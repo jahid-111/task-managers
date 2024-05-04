@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import SearchTask from "./SearchTask";
 import ActionTask from "./ActionTask";
 import ListTask from "./ListTask";
+import AddTaskModal from "./AddTaskModal";
 
 const defaultTask = {
   id: crypto.randomUUID(),
@@ -16,15 +17,16 @@ const defaultTask = {
 
 const TaskBoard = () => {
   const [tasks, setTasks] = useState([defaultTask]);
+  const [openModal, setOpenModal] = useState(false);
 
-
-
-    function addTaskHandle () {
-      console.log("ADDED TASK")
-    }
+  function addTaskHandle(tag) {
+    console.log("AADEDED", tag);
+  }
 
   return (
-    <div className=" w9/12 mx-auto">
+    <div className="mx-auto">
+      {openModal && <AddTaskModal onSave={addTaskHandle}></AddTaskModal>}
+
       <section className="mb-20" id="tasks">
         <div className="container">
           <div className="p-2 flex justify-end">
@@ -32,14 +34,9 @@ const TaskBoard = () => {
           </div>
 
           <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
+            <ActionTask addTaskHandle={() => setOpenModal(true)}></ActionTask>
 
-            <ActionTask 
-              addTaskHandle = {addTaskHandle}
-                ></ActionTask>
-
-            <ListTask 
-              tasks={tasks}
-                ></ListTask>
+            <ListTask tasks={tasks}></ListTask>
           </div>
         </div>
       </section>

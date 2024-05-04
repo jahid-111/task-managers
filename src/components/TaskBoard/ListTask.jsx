@@ -2,6 +2,7 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
 
+// eslint-disable-next-line react/prop-types
 const ListTask = ({ tasks }) => {
   return (
     <div>
@@ -33,22 +34,21 @@ const ListTask = ({ tasks }) => {
             </tr>
           </thead>
           <tbody>
-
             {tasks.map((task) => (
               <tr
                 key={task.id}
                 className="border-b border-[#2E3443] [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2"
               >
                 <td>
-                  {task.isFavorite ? 
-                    <FaStar className=" text-yellow-400"></FaStar> :
-                    <FaStar className=" text-white"></FaStar>}
+                  {task.isFavorite ? (
+                    <FaStar className=" text-yellow-400"></FaStar>
+                  ) : (
+                    <FaStar className=" text-white"></FaStar>
+                  )}
                 </td>
                 <td>{task.title}</td>
                 <td>
-                  <div>
-                    {task.description}
-                  </div>
+                  <div>{task.description}</div>
                 </td>
                 <td>
                   <ul className="flex justify-center gap-1.5 flex-wrap">
