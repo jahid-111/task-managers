@@ -3,7 +3,7 @@ import React from "react";
 import { FaStar } from "react-icons/fa";
 
 // eslint-disable-next-line react/prop-types
-const ListTask = ({ tasks }) => {
+const ListTask = ({ tasks, onEdit }) => {
   return (
     <div>
       <div className="overflow-auto">
@@ -65,7 +65,12 @@ const ListTask = ({ tasks }) => {
                 <td>
                   <div className="flex items-center justify-center space-x-3">
                     <button className="text-red-500">Delete</button>
-                    <button className="text-blue-500">Edit</button>
+                    
+                    
+                    <button
+                      onClick={ () =>onEdit(task)}
+                        className="text-blue-500">Edit</button>
+                    
                   </div>
                 </td>
               </tr>

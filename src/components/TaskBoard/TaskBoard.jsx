@@ -18,9 +18,19 @@ const defaultTask = {
 const TaskBoard = () => {
   const [tasks, setTasks] = useState([defaultTask]);
   const [openModal, setOpenModal] = useState(false);
+  const [updateTask, setUpdateTask] = useState(null);
 
-  function addTaskHandle(tag) {
-    console.log("AADEDED", tag);
+  function addTaskHandle(task) {
+    console.log("AADEDED", task);
+    setTasks([...tasks, task]);
+    setOpenModal(false);
+  
+  }
+
+  function handleEditTask (edited) {
+    setUpdateTask(edited);
+    setOpenModal(true);
+    
   }
 
   return (
@@ -36,7 +46,7 @@ const TaskBoard = () => {
           <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
             <ActionTask addTaskHandle={() => setOpenModal(true)}></ActionTask>
 
-            <ListTask tasks={tasks}></ListTask>
+            <ListTask tasks={tasks} onEdit={handleEditTask}></ListTask>
           </div>
         </div>
       </section>

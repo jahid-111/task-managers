@@ -77,23 +77,24 @@ const AddTaskModal = ({ onSave }) => {
                 Priority :
               </label>
 
-              <selectF
+              <select
                 className=" h-8 ms-2 w-22 bg-yellow-200 text-gray-900 font-semibold outline-none rounded-[4px] "
                 id="priority"
                 name="priority"
                 value={task.priority}
                 onChange={handleChange}
               >
-                <option value="volvo">Normal</option>
-                <option value="saab">High</option>
-                <option value="opel">Low</option>
-              </selectF>
+                <option value="Normal">Normal</option>
+                <option value="High">High</option>
+                <option value="Low">Low</option>
+              </select>
             </div>
           </div>
         </div>
 
         <button
           onClick={() => onSave(task)}
+          type="submit"
           className="bg-gray-600 mt-5 py-2 rounded-md font-semibold w-2/12 block mx-auto"
         >
           Create
