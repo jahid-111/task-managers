@@ -20,22 +20,41 @@ const TaskBoard = () => {
   const [openModal, setOpenModal] = useState(false);
   const [updateTask, setUpdateTask] = useState(null);
 
-  function addTaskHandle(task) {
-    console.log("AADEDED", task);
-    setTasks([...tasks, task]);
+  function addTaskHandle(newTask, isAdd) {
+    if (isAdd) {
+      setTasks([...tasks, newTask]);
+    } else {
+      setTasks(
+        tasks.map((taskId) => {
+          if (taskId.id === newTask.id) {
+            return newTask;
+          }
+          return taskId;
+        })
+      );
+    }
     setOpenModal(false);
-  
   }
 
-  function handleEditTask (edited) {
+  function handleEditTask(edited) {
     setUpdateTask(edited);
     setOpenModal(true);
-    
+  }
+
+  function closeModalToclick() {
+    setOpenModal(false);
+    setUpdateTask(null);
   }
 
   return (
     <div className="mx-auto">
-      {openModal && <AddTaskModal onSave={addTaskHandle}></AddTaskModal>}
+      {openModal && (
+        <AddTaskModal
+          onSave={addTaskHandle}
+          taskUpdate={updateTask}
+          closeToClick={closeModalToclick}
+        ></AddTaskModal>
+      )}
 
       <section className="mb-20" id="tasks">
         <div className="container">

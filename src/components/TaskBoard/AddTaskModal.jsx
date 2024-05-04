@@ -1,16 +1,21 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
+import { FaXmark } from "react-icons/fa6";
 
 // eslint-disable-next-line react/prop-types
-const AddTaskModal = ({ onSave }) => {
-  const [task, setTasks] = useState({
-    id: crypto.randomUUID(),
-    title: "",
-    description: "",
-    tags: "",
-    priority: [],
-    isFavorite: false,
-  });
+const AddTaskModal = ({ onSave, taskUpdate, closeToClick }) => {
+  const [task, setTasks] = useState(
+    taskUpdate || {
+      id: crypto.randomUUID(),
+      title: "",
+      description: "",
+      tags: "",
+      priority: [],
+      isFavorite: false,
+    }
+  );
+
+  const [isEdit, setIsEdit] = useState(Object.is(taskUpdate, null));
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -30,8 +35,17 @@ const AddTaskModal = ({ onSave }) => {
       <div className=" bg-gray-500 bg-opacity-80 h-full z-10 absolute  top-0 left-0 "></div>
 
       <htmlForm className=" bg-green-600 rounded-md w-full  sm:w-6/12 mx-auto z-10 absolute top-32 sm:left-1/4 p-4">
+        <div className="absolute right-0">
+          <button onClick={closeToClick}>
+            <FaXmark
+              className="  h-5 w-5 me-4 bg-red-400"
+              title="Close Modal"
+            ></FaXmark>
+          </button>
+        </div>
+
         <h3 className=" text-center text-2xl font-semibold my-2">
-          Add New Task
+          {isEdit ? "Add New Task" : "Edit This Task"}
         </h3>
 
         <div>
@@ -93,11 +107,11 @@ const AddTaskModal = ({ onSave }) => {
         </div>
 
         <button
-          onClick={() => onSave(task)}
+          onClick={() => onSave(task, isEdit)}
           type="submit"
           className="bg-gray-600 mt-5 py-2 rounded-md font-semibold w-2/12 block mx-auto"
         >
-          Create
+          {isEdit ? "Add to Task" : "Edit This Task"}
         </button>
       </htmlForm>
     </>
