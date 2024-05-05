@@ -2,7 +2,7 @@
 import React from "react";
 
 // eslint-disable-next-line react/prop-types
-const ActionTask = ({ addTaskHandle }) => {
+const ActionTask = ({ addTaskHandle, deleteTaskAll }) => {
   return (
     <div>
       <div className="mb-14 items-center justify-between sm:flex">
@@ -14,7 +14,10 @@ const ActionTask = ({ addTaskHandle }) => {
           >
             Add Task
           </button>
-          <button className="rounded-md bg-red-500 px-3.5 py-2.5 text-sm font-semibold">
+          <button
+            onClick={deleteTaskAll}
+            className="rounded-md bg-red-500 px-3.5 py-2.5 text-sm font-semibold"
+          >
             Delete All
           </button>
         </div>

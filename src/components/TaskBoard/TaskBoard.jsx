@@ -45,6 +45,23 @@ const TaskBoard = () => {
     setOpenModal(false);
     setUpdateTask(null);
   }
+  function handleDeleteThis(taskId) {
+    const deleteThisTask = tasks.filter((task) => task.id !== taskId);
+    setTasks(deleteThisTask);
+  }
+
+  function deleteTaskAll() {
+    tasks.length = 0;
+    setTasks([...tasks]);
+  }
+
+  function handleFavorite(taskId) {
+    const taskIndex = tasks.findIndex((task) => task.id === taskId);
+    console.log(taskIndex);
+    const newTask = [...tasks];
+    newTask[taskIndex].isFavorite = !newTask[taskIndex].isFavorite;
+    setTasks(newTask);
+  }
 
   return (
     <div className="mx-auto">
@@ -63,9 +80,17 @@ const TaskBoard = () => {
           </div>
 
           <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
-            <ActionTask addTaskHandle={() => setOpenModal(true)}></ActionTask>
+            <ActionTask
+              addTaskHandle={() => setOpenModal(true)}
+              deleteTaskAll={deleteTaskAll}
+            ></ActionTask>
 
-            <ListTask tasks={tasks} onEdit={handleEditTask}></ListTask>
+            <ListTask
+              tasks={tasks}
+              onEdit={handleEditTask}
+              deleteThisTask={handleDeleteThis}
+              onFav={handleFavorite}
+            ></ListTask>
           </div>
         </div>
       </section>

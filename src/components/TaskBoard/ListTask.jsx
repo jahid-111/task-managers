@@ -3,7 +3,7 @@ import React from "react";
 import { FaStar } from "react-icons/fa";
 
 // eslint-disable-next-line react/prop-types
-const ListTask = ({ tasks, onEdit }) => {
+const ListTask = ({ tasks, onEdit, deleteThisTask, onFav }) => {
   return (
     <div>
       <div className="overflow-auto">
@@ -39,21 +39,23 @@ const ListTask = ({ tasks, onEdit }) => {
                 key={task.id}
                 className="border-b border-[#2E3443] [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2"
               >
-                <td>
-                  {task.isFavorite ? (
-                    <FaStar className=" text-yellow-400"></FaStar>
-                  ) : (
-                    <FaStar className=" text-white"></FaStar>
-                  )}
-                </td>
+                <button onClick={() => onFav(task.id)}>
+                  <td>
+                    {task.isFavorite ? (
+                      <FaStar className=" text-yellow-400"></FaStar>
+                    ) : (
+                      <FaStar className=" text-white"></FaStar>
+                    )}
+                  </td>
+                </button>
                 <td>{task.title}</td>
                 <td>
                   <div>{task.description}</div>
                 </td>
                 <td>
                   <ul className="flex justify-center gap-1.5 flex-wrap">
-                    {task.tags.map((tag, i) => (
-                      <li key={i}>
+                    {task.tags.map((tag) => (
+                      <li key={crypto.randomUUID()}>
                         <span className="inline-block h-5 whitespace-nowrap rounded-[45px] bg-[#00D991A1] px-2.5 text-sm capitalize text-[#F4F5F6]">
                           {tag}
                         </span>
@@ -64,7 +66,12 @@ const ListTask = ({ tasks, onEdit }) => {
                 <td className="text-center">{task.priority}</td>
                 <td>
                   <div className="flex items-center justify-center space-x-3">
-                    <button className="text-red-500">Delete</button>
+                    <button
+                      onClick={() => deleteThisTask(task.id)}
+                      className="text-red-500"
+                    >
+                      Delete{" "}
+                    </button>
 
                     <button
                       onClick={() => onEdit(task)}
