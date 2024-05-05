@@ -4,6 +4,7 @@ import SearchTask from "./SearchTask";
 import ActionTask from "./ActionTask";
 import ListTask from "./ListTask";
 import AddTaskModal from "./AddTaskModal";
+import EmptyTask from "./EmptyTask";
 
 const defaultTask = {
   id: crypto.randomUUID(),
@@ -91,13 +92,16 @@ const TaskBoard = () => {
               addTaskHandle={() => setOpenModal(true)}
               deleteTaskAll={deleteTaskAll}
             ></ActionTask>
-
-            <ListTask
-              tasks={tasks}
-              onEdit={handleEditTask}
-              deleteThisTask={handleDeleteThis}
-              onFav={handleFavorite}
-            ></ListTask>
+            {tasks.length > 0 ? (
+              <ListTask
+                tasks={tasks}
+                onEdit={handleEditTask}
+                deleteThisTask={handleDeleteThis}
+                onFav={handleFavorite}
+              ></ListTask>
+            ) : (
+              <EmptyTask></EmptyTask>
+            )}
           </div>
         </div>
       </section>
