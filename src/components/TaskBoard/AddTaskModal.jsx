@@ -38,7 +38,7 @@ const AddTaskModal = ({ onSave, taskUpdate, closeToClick }) => {
         <div className="absolute right-0">
           <button onClick={closeToClick}>
             <FaXmark
-              className="  h-5 w-5 me-4 bg-red-400"
+              className=" hover:bg-red-800  h-5 w-5 me-4 bg-red-400"
               title="Close Modal"
             ></FaXmark>
           </button>

@@ -9,7 +9,7 @@ const defaultTask = {
   id: crypto.randomUUID(),
   title: "Learn React",
   description:
-    " Lorem, ipsum dolor sit amet consectetur adipisicing elit. Atque voluptatem ea nihil laudantium doloremque itaque, eos, similique nostrum porro libero quas necessitatibus consequatur natus neque iste consectetur accusantium ab impedit!",
+    " Lorem, ipsum dolor sit amet consectetur adipisicing elit. Atque voluptatem ea nihil laudantium doloremq",
   tags: ["web", "reactJS", "javascript"],
   priority: "High",
   isFavorite: false,
@@ -63,8 +63,15 @@ const TaskBoard = () => {
     setTasks(newTask);
   }
 
+  function handleSearch(searchTerm) {
+    const search = tasks.filter((searchInput) =>
+      searchInput.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setTasks([...search]);
+  }
+
   return (
-    <div className="mx-auto">
+    <div className="mx-auto w-full">
       {openModal && (
         <AddTaskModal
           onSave={addTaskHandle}
@@ -76,7 +83,7 @@ const TaskBoard = () => {
       <section className="mb-20" id="tasks">
         <div className="container">
           <div className="p-2 flex justify-end">
-            <SearchTask></SearchTask>
+            <SearchTask OnSearch={handleSearch}></SearchTask>
           </div>
 
           <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
